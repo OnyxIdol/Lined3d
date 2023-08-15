@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://pcm1pallml1t"]
+
+[ext_resource type="PackedScene" uid="uid://dbt8hfmuacpw6" path="res://line_3d.tscn" id="1_ht5s0"]
+[ext_resource type="Script" path="res://node_3d.gd" id="1_lafrt"]
+[ext_resource type="Texture2D" uid="uid://uiwlg3fc7a73" path="res://Beam.png" id="3_qxv83"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ye6fs"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("3_qxv83")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t436a"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4ho0t"]
+material = SubResource("StandardMaterial3D_t436a")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxudx"]
+albedo_color = Color(0.937255, 0.290196, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nr8nr"]
+material = SubResource("StandardMaterial3D_lxudx")
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_lafrt")
+
+[node name="Line3D" parent="." instance=ExtResource("1_ht5s0")]
+material = SubResource("StandardMaterial3D_ye6fs")
+width = 0.2
+
+[node name="point1" type="Node3D" parent="Line3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="point2" type="Node3D" parent="Line3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("PlaneMesh_4ho0t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.732555, 0.494974, -0.467293, 0, 0.686482, 0.727147, 0.680708, 0.532675, -0.502886, -3.45971, 5.38359, -3.72323)
+shadow_enabled = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65618, 0.99678, 1.39848)
+mesh = SubResource("CapsuleMesh_nr8nr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -3.55271e-15, -8.74228e-08, -4.73461e-08, 0.840652, 0.541576, 7.34921e-08, 0.541576, -0.840652, 0, 1.26168, -2.04637)
+current = true
