@@ -23,12 +23,13 @@ func _ready():
 func _process(_delta):	
 	var camera=get_viewport().get_camera_3d()
 	
-	var globalPoint1=point1.global_position
-	var globalpoint2=point2.global_position
+	var globalPoint1:Vector3=point1.global_position
+	var globalpoint2:Vector3=point2.global_position
+	var lineDirection=globalPoint1.direction_to(globalpoint2)
 	
-	var normal:Vector3 = -camera.global_transform.basis.z.direction_to(globalPoint1)
-	normal=globalPoint1.project(normal)
+	var normal:Vector3 = -camera.global_transform.origin.direction_to(globalPoint1)	
 	var widthVector:Vector3=normal.cross(globalPoint1.direction_to(globalpoint2)).normalized()
+	normal=lineDirection.cross(widthVector)
 
 	
 		
